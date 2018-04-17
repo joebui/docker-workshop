@@ -1,0 +1,23 @@
+{
+  "name": "todolist",
+  "version": "1.0.0",
+  "description": "RESTful web service",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "dienbui",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
+    "cors": "^2.8.4",
+    "express": "^4.16.2",
+    "helmet": "^3.9.0",
+    "json-query": "^2.2.2",
+    "jsonwebtoken": "^8.1.0",
+    "mysql2": "^1.5.1",
+    "sequelize": "^4.31.2"
+  },
+  "devDependencies": {}
+}
