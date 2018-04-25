@@ -16,12 +16,7 @@ const config = {
       Images: paths.IMG
     }
   },
-  entry: [
-    "./src/app.jsx",
-    "./dist/styles/application.scss",
-    "./node_modules/react-dates/lib/css/_datepicker.css",
-    "./node_modules/react-tagsinput/react-tagsinput.css"
-  ],
+  entry: ["./src/app.jsx", "./dist/styles/application.scss"],
 
   output: {
     filename: "index.js",

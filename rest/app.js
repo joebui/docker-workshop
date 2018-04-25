@@ -1,17 +1,16 @@
 const app = require("express")();
-const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const server = require("http").Server(app);
 const cors = require("cors");
 const helmet = require("helmet");
 
-expressWinston.requestWhitelist.push("body");
+global.sequelize = require("./mysql-connection");
+const service = require("./service");
 
 app.set("port", process.env.EXPRESS_PORT);
 app.options("*", cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use(helmet());
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", process.env.ORIGIN);
@@ -23,11 +22,21 @@ app.use((req, res, next) => {
 });
 
 /** Register APIs */
-app.get("/todos");
-app.get("/todos/:id");
-app.post("/todos");
-app.put("/todos/:id");
-app.delete("/todos/:id");
+app.get("/todos", async (req, res) => {
+  const value = await service.findAll();
+  res.json(value);
+});
+
+app.get("/todos/:id", (req, res) => {});
+
+app.post("/todos", async (req, res) => {
+  const todo = await service.create(req.body);
+  res.json(todo);
+});
+
+app.put("/todos/");
+
+app.delete("/todos/");
 
 server.listen(app.get("port"), "0.0.0.0", () => {
   console.log(`Listening on port ${app.get("port")}`);

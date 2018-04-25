@@ -3,9 +3,9 @@ services:
   # RESTful service
   rest:
     command: sh -c "yarn; nodemon --inspect=0.0.0.0:9229 app.js"
-    build: 'rest-service'
+    build: 'rest'
     volumes:
-      - "./rest-service:/var/rest"
+      - "./rest:/var/rest"
     environment:
       TERM: xterm-256color
       DEBUG: '*'
@@ -15,30 +15,32 @@ services:
       DB_NAME: todolist
       DB_HOST: mysql
       ORIGIN: "http://localhost:3000"
-    links:
-      - mysql
     ports:
       - 5000:5000
+    links:
+      - mysql
+    stdin_open: true
+    tty: true
     container_name: rest
-
-  # Main db
-  mysql:
-    image: mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: 'root'
-      TERM: xterm-256color
-    ports:
-      - 3306:3306
-    container_name: database
-
   # Web app
   webapp:
     command: sh -c "yarn; npm start"
-    build: 'webapp'
+    build: 'spa'
     volumes:
-     - "./webapp:/var/spa"
+     - "./spa:/var/spa"
     environment:
       TERM: xterm-256color
     ports:
       - 3000:3000
+    stdin_open: true
+    tty: true
     container_name: webapp
+  # Main db
+  mysql:
+    image: mysql:5.7
+    environment:
+      TERM: xterm-256color
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - 3306:3306
+    container_name: database

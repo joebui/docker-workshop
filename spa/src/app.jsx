@@ -5,7 +5,6 @@ import { Provider } from "react-redux";
 
 import Layout from "./shared/components/Layout";
 
-import { GRAPHQL_ENDPOINT } from "./shared/utils/constants";
 import configureStore from "./redux/stores";
 
 const store = configureStore();
