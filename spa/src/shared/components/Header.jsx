@@ -15,11 +15,9 @@ export default class Header extends Component {
   render() {
     return (
       <header className="header">
-        <Navbar className="header__navbar" expand="xl">
+        <Navbar color="dark" dark expand="md" className="navbar">
           <Container>
-            <NavbarBrand tag={Link} to="/" className="header__brand">
-              <span className="header__wlogo">To-do list</span>
-            </NavbarBrand>
+            <NavbarBrand href="/">To-do list</NavbarBrand>
           </Container>
         </Navbar>
       </header>

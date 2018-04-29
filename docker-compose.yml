@@ -4,6 +4,7 @@ services:
   rest:
     command: sh -c "yarn; nodemon --inspect=0.0.0.0:9229 app.js"
     build: 'rest'
+    image: 'dockerworkshop_rest'
     volumes:
       - "./rest:/var/rest"
     environment:
@@ -26,6 +27,7 @@ services:
   webapp:
     command: sh -c "yarn; npm start"
     build: 'spa'
+    image: 'dockerworkshop_spa'
     volumes:
      - "./spa:/var/spa"
     environment:
@@ -43,4 +45,6 @@ services:
       MYSQL_ROOT_PASSWORD: root
     ports:
       - 3306:3306
+    stdin_open: true
+    tty: true
     container_name: database

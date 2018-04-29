@@ -1,11 +1,11 @@
 import axios from "axios";
 
-axios.defaults.baseURL = REST_ENDPOINT;
+axios.defaults.baseURL = process.env.REST_ENDPOINT;
 
-export default function baseService(method, link, data) {
+export default function baseService(method, url, data) {
   return axios({
-    method: method,
-    url: link,
-    data: data
+    method,
+    url,
+    data
   });
 }

@@ -27,16 +27,26 @@ app.get("/todos", async (req, res) => {
   res.json(value);
 });
 
-app.get("/todos/:id", (req, res) => {});
+app.get("/todos/:id", async (req, res) => {
+  const todo = await service.getById(req.params.id);
+  res.json(todo);
+});
 
 app.post("/todos", async (req, res) => {
+  console.log(req.body);
   const todo = await service.create(req.body);
   res.json(todo);
 });
 
-app.put("/todos/");
+app.put("/todos/:id", async (req, res) => {
+  const todo = await service.update(req.params.id, req.body);
+  res.json(todo);
+});
 
-app.delete("/todos/");
+app.delete("/todos/:id", async (req, res) => {
+  const todo = await service.delete(req.params.id);
+  res.json(todo);
+});
 
 server.listen(app.get("port"), "0.0.0.0", () => {
   console.log(`Listening on port ${app.get("port")}`);
